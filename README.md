@@ -79,9 +79,9 @@ $$K_{i+j+1} = \frac{b^{i+j+1}-a^{i+j+1}}{i+j+1}$$
 
 $$K = \begin{bmatrix}K_{1}&\dots&K_{n+1}\\\ \vdots&\ddots&\vdots \\\ K_{n+1}&\dots&Kb_{2n+1}\end{bmatrix}$$
  
-$$c=\begin{bmatrix} c_{0} \\ \vdots \\ c_{n} \end{bmatrix}$$
+$$c=\begin{bmatrix} c_{0} \\\ \vdots \\\ c_{n} \end{bmatrix}$$
  
-$$I = \begin{bmatrix} \int_{a}^{b}f(x)x^0 \mathrm{d}x \\ \vdots \\ \int_{a}^{b}f(x)x^n\mathrm{d}x\end{bmatrix}$$
+$$I = \begin{bmatrix} \int_{a}^{b}f(x)x^0 \mathrm{d}x \\\ \vdots \\\ \int_{a}^{b}f(x)x^n\mathrm{d}x\end{bmatrix}$$
 
 $$Kc=I$$
 
@@ -89,6 +89,14 @@ Identifying the correct values for $c$ is simply inverting $K$ and multiplying b
 
 $$c = K^{-1}I$$
 
+The $K$ matrix is initialized as a numpy array, along with the $I$ vector
+
 ```python
 K = np.array([[(((b ** (i + j + 1)) - (a ** (i + j + 1)))/(i + j + 1)) for i in range(n)] for j in range(n)])
 ```
+
+```python
+I = np.array([quad(lambda x: f(x) * x ** i, a, b)[0] for i in range(n)])
+```
+
+The $c$ vector is calculated with a matrix multiplication, and `Polynomial()` presents the answer as a polynomial.
