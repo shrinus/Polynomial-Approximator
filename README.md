@@ -100,3 +100,8 @@ I = np.array([quad(lambda x: f(x) * x ** i, a, b)[0] for i in range(n)])
 ```
 
 The $c$ vector is calculated with a matrix multiplication, and `Polynomial()` presents the answer as a polynomial.
+
+```python
+c = np.matmul(np.linalg.inv(K), I)
+Polynomial(c)
+```
