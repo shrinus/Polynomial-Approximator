@@ -3,15 +3,17 @@ A program to approximate continuous functions with polynomials on any given inte
 
 Suppose we had some function $f(x)$ that we wanted to approximate using a polynomial. One obvious method is the taylor series of $f(x)$ centered on some $c$ but the error of the series is distributed unequally along the domain.  
 
-Furthermore, taylor series for arbitrary functions may have intervals of convergance, such as $e^{-x^2}$ only converging on the interval $[-2, 2]$. This algorithm allows you to surpass this boundary. For example, the 10th taylor polynomial about $0$ is 
+For example, the 10th taylor polynomial about $0$ for $f(x) = e^{-x^2}$ is 
 
 $$1-x^{2}+\frac{1}{2}x^{4}-\frac{1}{6}x^{6}+\frac{1}{24}x^{8}-\frac{1}{120}x^{10}$$
 
 while the 10th polynomial approximation on the interval $[-3, 3]$ is about
 
-$0.9910710040287763-0.9121511249107619x^{2}+0.3533078594251453x^{4}-0.06864072857794135x^{6}+0.0065184693000363x^{8}-0.00023962430100394564x^{10}$
+$$0.99107-0.91215x^{2}+0.35330x^{4}-0.06864x^{6}+0.00651x^{8}-0.00024x^{10}$$
 
-Though the taylor polynomial outperforms this algorithm for values very close to $0$, the algorithm outperforms the taylor polynomial on the interval $[-2, 2]$ by a over a factor of $100$ when using the $L^2$ norm, and even extends this accuracy to the original interval of $[-3, 3]$
+Though the taylor polynomial outperforms this algorithm for values very close to $0$, the algorithm outperforms the taylor polynomial on the interval $[-2, 2]$ by a factor of $2$ even when truncating the approximation to only 5 decimal places, and even extends this accuracy to the original interval of $[-3, 3]$
+
+Furthermore, taylor series for arbitrary functions may have intervals of convergance, such as $[-2, 2]$. This algorithm allows you to surpass this boundary. 
 
 To derive this algorithm you first need to formalize the notion of error between the function $f(x)$ and the approximation $p(x)$. To do this we use the $L^2$ norm. the $L^2$ norm is the same as uclidean distance, the root of the sum of the squared differences in each dimention. 
 
