@@ -77,10 +77,24 @@ For each $i$ from $0$ to $n$. Note that each coefficient $c_i$ is linear, thus t
 
 $$K_{i+j+1} = \frac{b^{i+j+1}-a^{i+j+1}}{i+j+1}$$
 
-$$K = \begin{bmatrix} K_{1} & \dots  & K_{n+1} \\ \vdots & \ddots & \vdots \\ K_{n+1} & \dots & Kb_{2n+1} \end{bmatrix} \qquad c=\begin{bmatrix} c_{0} \\ \vdots \\ c_{n} \end{bmatrix} \qquad I = \begin{bmatrix} \int_{a}^{b}f(x)x^0 \mathrm{d}x \\ \vdots \\ \int_{a}^{b}f(x)x^n\mathrm{d}x\end{bmatrix}$$
+$$K = \begin{bmatrix} K_{1} & \dots  & K_{n+1} \\
+ \vdots & \ddots & \vdots \\ 
+ K_{n+1} & \dots & Kb_{2n+1} \end{bmatrix} \qquad 
+ 
+ c=\begin{bmatrix} c_{0} \\ 
+ \vdots \\ 
+ c_{n} \end{bmatrix} \qquad 
+ 
+ I = \begin{bmatrix} \int_{a}^{b}f(x)x^0 \mathrm{d}x \\ 
+ \vdots \\ 
+ \int_{a}^{b}f(x)x^n\mathrm{d}x\end{bmatrix}$$
 
 $$Kc=I$$
 
 Identifying the correct values for $c$ is simply inverting $K$ and multiplying by $I$
 
-$$c = K^{-1}I
+$$c = K^{-1}I$$
+
+```python
+K = np.array([[(((b ** (i + j + 1)) - (a ** (i + j + 1)))/(i + j + 1)) for i in range(n)] for j in range(n)])
+```
