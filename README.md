@@ -77,7 +77,7 @@ For each $i$ from $0$ to $n$. Note that each coefficient $c_i$ is linear, thus t
 
 $$K_{i+j+1} = \frac{b^{i+j+1}-a^{i+j+1}}{i+j+1}$$
 
-$$K = \begin{bmatrix}K_{1}&\dots&K_{n+1}\\\vdots&\ddots&\vdots\\K_{n+1}&\dots&Kb_{2n+1}\end{bmatrix}$$
+$$K = \begin{bmatrix}K_{1}&\dots&K_{n+1}\\\ \vdots&\ddots&\vdots \\\ K_{n+1}&\dots&Kb_{2n+1}\end{bmatrix}$$
  
 $$c=\begin{bmatrix} c_{0} \\ \vdots \\ c_{n} \end{bmatrix}$$
  
