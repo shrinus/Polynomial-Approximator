@@ -7,9 +7,9 @@ Furthermore, taylor series for arbitrary functions may have intervals of converg
 
 $$1-x^{2}+\frac{1}{2}x^{4}-\frac{1}{6}x^{6}+\frac{1}{24}x^{8}-\frac{1}{120}x^{10}$$
 
-while the 10th polynomial approximation on the interval $[-3, 3]$ is
+while the 10th polynomial approximation on the interval $[-3, 3]$ is about
 
-$$0.9910710040287763-0.9121511249107619x^{2}+0.3533078594251453x^{4}-0.06864072857794135x^{6}+0.0065184693000363x^{8}-0.00023962430100394564x^{10}$$
+$0.9910710040287763-0.9121511249107619x^{2}+0.3533078594251453x^{4}-0.06864072857794135x^{6}+0.0065184693000363x^{8}-0.00023962430100394564x^{10}$
 
 Though the taylor polynomial outperforms this algorithm for values very close to $0$, the algorithm outperforms the taylor polynomial on the interval $[-2, 2]$ by a over a factor of $100$ when using the $L^2$ norm, and even extends this accuracy to the original interval of $[-3, 3]$
 
@@ -39,7 +39,7 @@ $$E'(c_0,c_1...c_i...c_n)=\int_{a}^{b}(f(x)-p(c_0,c_1...c_i...c_n,x))^2\mathrm{d
 
 Minimizing the error function is now simply just finding where the gradient of $E'$ is equal to $0$.
 
-$$\nabla E`=0$$
+$$\nabla E'=0$$
 
 Let's examine the partial derivatives one by one
 
@@ -50,7 +50,9 @@ Using the chain rule,
 $$\int_{a}^{b}(f(x)-p(c_0,c_1...c_i...c_n,x))\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)\mathrm{d} x=0$$
 $$\int_{a}^{b}f(x)\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)\mathrm{d} x=\int_{a}^{b}p(c_0,c_1...c_i...c_n,x)\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)\mathrm{d}x$$
 
-since $p(c_0,c_1...c_i...c_n,x) = \sum_{i = 0}^{n}c_ix^i$, $\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)=x^i$
+since 
+$$p(c_0,c_1...c_i...c_n,x) = \sum_{i = 0}^{n}c_ix^i$$
+$$\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)=x^i$$
 
 Thus
 $$\int_{a}^{b}p(c_0,c_1...c_i...c_n,x)x^i\mathrm{d}x=\int_{a}^{b}f(x)x^i\mathrm{d}x$$
@@ -75,25 +77,7 @@ For each $i$ from $0$ to $n$. Note that each coefficient $c_i$ is linear, thus t
 
 $$K_{i+j+1} = \frac{b^{i+j+1}-a^{i+j+1}}{i+j+1}$$
 
-$$K = \begin{bmatrix} 
-    K_{1} & \dots  & K_{n+1}\\
-    \vdots & \ddots & \vdots\\
-    K_{n+1} & \dots  &Kb_{2n+1} 
-    \end{bmatrix}\qquad 
-    
-    c=\begin{bmatrix} 
-    c_{0}\\
-    \vdots\\
-    c_{n}
-    \end{bmatrix}\qquad
-    
-    I = \begin{bmatrix} 
-    \int_{a}^{b}f(x)x^0\mathrm{d}x\\
-    \vdots\\
-    \int_{a}^{b}f(x)x^n\mathrm{d}x
-    \end{bmatrix}
-    
-    $$
+$$K = \begin{bmatrix}K_{1} & \dots  & K_{n+1}\\\vdots & \ddots & \vdots\\K_{n+1} & \dots  &Kb_{2n+1} \end{bmatrix}\qquad c=\begin{bmatrix} c_{0}\\\vdots\\c_{n}\end{bmatrix}\qquad I = \begin{bmatrix}  \int_{a}^{b}f(x)x^0\mathrm{d}x\\ \vdots\\\int_{a}^{b}f(x)x^n\mathrm{d}x\end{bmatrix}$$
 $$Kc=I$$
 
 Identifying the correct values for $c$ is simply inverting $K$ and multiplying by $I$
