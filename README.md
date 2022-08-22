@@ -27,9 +27,75 @@ $$E'=\int_{a}^{b}(f(x)-p(x))^2\mathrm{d} x$$
 
 $p(x)$ can be expressed as a power series.
 
-$$p(x) = \sum_{n = 0}^{k}c_nx^n$$
+$$p(x) = \sum_{i = 0}^{n}c_ix^i$$
 
 Since the objective of the algorithm is to minimize the error by changing $c_0,c_1...c_n...c_k$, p(x) is actually a function of all these variables.
 
-$$p(c_0,c_1...c_n...c_k,x) = \sum_{n = 0}^{k}c_nx^n$$
+$$p(c_0,c_1...c_i...c_n,x) = \sum_{i = 0}^{n}c_ix^i$$
 
+The error function changes as well
+
+$$E'(c_0,c_1...c_i...c_n)=\int_{a}^{b}(f(x)-p(c_0,c_1...c_i...c_n,x))^2\mathrm{d} x$$
+
+Minimizing the error function is now simply just finding where the gradient of $E'$ is equal to $0$.
+
+$$\nabla E`=0$$
+
+Let's examine the partial derivatives one by one
+
+$$\frac{\partial }{\partial c_i}\int_{a}^{b}(f(x)-p(c_0,c_1...c_i...c_n,x))^2\mathrm{d} x = 0$$
+
+Using the chain rule,
+
+$$\int_{a}^{b}(f(x)-p(c_0,c_1...c_i...c_n,x))\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)\mathrm{d} x=0$$
+$$\int_{a}^{b}f(x)\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)\mathrm{d} x=\int_{a}^{b}p(c_0,c_1...c_i...c_n,x)\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)\mathrm{d}x$$
+
+since $p(c_0,c_1...c_i...c_n,x) = \sum_{i = 0}^{n}c_ix^i$, $\frac{\partial }{\partial c_i}p(c_0,c_1...c_i...c_n,x)=x^i$
+
+Thus
+$$\int_{a}^{b}p(c_0,c_1...c_i...c_n,x)x^i\mathrm{d}x=\int_{a}^{b}f(x)x^i\mathrm{d}x$$
+
+The left side can be simplified further
+
+$$\int_{a}^{b}p(c_0,c_1...c_i...c_n,x)x^i\mathrm{d}x$$
+
+$$\int_{a}^{b}\sum_{j = 0}^{n}c_jx^j\cdot x^i\mathrm{d}x$$
+
+$$\int_{a}^{b}\sum_{j = 0}^{n}c_jx^{i+j}\mathrm{d}x$$
+
+$$\sum_{j = 0}^{n}c_j\int_{a}^{b}x^{i+j}\mathrm{d}x$$
+
+$$\sum_{j = 0}^{n}\frac{c_j}{i+j+1}(b^{i+j+1}-a^{i+j+1})$$
+
+finally, we get
+
+$$\sum_{j = 0}^{n}\frac{b^{i+j+1}-a^{i+j+1}}{i+j+1}c_j=\int_{a}^{b}f(x)x^i\mathrm{d}x$$
+
+For each $i$ from $0$ to $n$. Note that each coefficient $c_i$ is linear, thus there is only 1 solution that minimizes the error. The system can be written as a matrix.
+
+$$K_{i+j+1} = \frac{b^{i+j+1}-a^{i+j+1}}{i+j+1}$$
+
+$$K = \begin{bmatrix} 
+    K_{1} & \dots  & K_{n+1}\\
+    \vdots & \ddots & \vdots\\
+    K_{n+1} & \dots  &Kb_{2n+1} 
+    \end{bmatrix}\qquad 
+    
+    c=\begin{bmatrix} 
+    c_{0}\\
+    \vdots\\
+    c_{n}
+    \end{bmatrix}\qquad
+    
+    I = \begin{bmatrix} 
+    \int_{a}^{b}f(x)x^0\mathrm{d}x\\
+    \vdots\\
+    \int_{a}^{b}f(x)x^n\mathrm{d}x
+    \end{bmatrix}
+    
+    $$
+$$Kc=I$$
+
+Identifying the correct values for $c$ is simply inverting $K$ and multiplying by $I$
+
+$$c = K^{-1}I
