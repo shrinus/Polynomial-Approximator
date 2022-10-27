@@ -13,9 +13,9 @@ $$0.99107-0.91215x^{2}+0.35330x^{4}-0.06864x^{6}+0.00651x^{8}-0.00024x^{10}$$
 
 Though the taylor polynomial outperforms this algorithm for values very close to $0$, the algorithm outperforms the taylor polynomial on the interval $[-2, 2]$ by a factor of $2$ even when truncating the approximation to only 5 decimal places, and even extends this accuracy to the original interval of $[-3, 3]$
 
-Furthermore, taylor series for arbitrary functions may have intervals of convergance, such as $[-2, 2]$. This algorithm allows you to surpass this boundary. 
+Furthermore, taylor series for arbitrary functions may have intervals of convergance, such as $[-2, 2]$. This algorithm allows you to surpass this boundary.
 
-To derive this algorithm you first need to formalize the notion of error between the function $f(x)$ and the approximation $p(x)$. To do this we use the $L^2$ norm. the $L^2$ norm is the same as uclidean distance, the root of the sum of the squared differences in each dimention. 
+To derive this algorithm you first need to formalize the notion of error between the function $f(x)$ and the approximation $p(x)$. To do this we use the $L^2$ norm. the $L^2$ norm is the same as uclidean distance, the root of the sum of the squared differences in each dimention.
 
 $$E = \sqrt{\sum_{x=0}^{n}(f_x-p_x)^2}$$
 
